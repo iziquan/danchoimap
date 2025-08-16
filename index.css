@@ -1,0 +1,134 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;    
+    font-size: 16px;
+}
+
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #161b21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.6s ease; /* mượt khi ẩn */
+}
+#loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    position: relative;
+    width: 164px;
+    height: 164px;
+    }
+    .loader::before , .loader::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    left: 50%;
+    top: 50%;
+    animation: rotate 1s ease-in infinite;
+}
+.loader::after {
+    width: 20px;
+    height: 20px;
+    background-color: #f4a950;
+    animation: rotate 1s ease-in infinite, moveY 1s ease-in infinite ;
+}
+@keyframes moveY {
+    0% , 100% {top: 10%}
+    45% , 55% {top: 59%}
+    60% {top: 40%}
+}
+@keyframes rotate {
+    0% { transform: translate(-50%, -100%) rotate(0deg) scale(1 , 1)}
+    25%{ transform: translate(-50%, 0%) rotate(180deg) scale(1 , 1)}
+    45% , 55%{ transform: translate(-50%, 100%) rotate(180deg) scale(3 , 0.5)}
+    60%{ transform: translate(-50%, 100%) rotate(180deg) scale(1, 1)}
+    75%{ transform: translate(-50%, 0%) rotate(270deg) scale(1 , 1)}
+    100%{ transform: translate(-50%, -100%) rotate(360deg) scale(1 , 1)}
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    image-rendering: pixelated;
+}
+
+.mouseposition {
+    background-color: white;
+    padding: 3px;
+    text-align: right;
+}
+
+.mousepositioncoord {
+    min-width: 40px;
+    display: inline-block;
+}
+
+div.ol-mouse-position {
+    background-color: white;
+    padding: 6px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ol-ctx-menu-container {
+    font-size: 16px;
+}
+
+.ol-scale-step-text {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    text-shadow:
+        1px 0 0 black,
+        0 1px 0 black,
+        -1px 0 0 black,
+        0 -1px 0 black,
+        0px 0px 8px black;
+}
+
+.ol-scale-singlebar-odd {
+    background: #ddd;
+}
+
+.ol-scale-singlebar-even {
+    background: #444;
+}
+
+.toastify {
+    color: black;
+    background: yellow;
+}
+
+.ol-ctx-menu-container li {
+    padding-left: 20px;
+}
+
+.menuitem-checked::before {
+    content: '☑';
+    width: 20px;
+    display: inline-block;
+    margin-left: -20px;
+}
+
+.menuitem-unchecked::before {
+    content: '☐';
+    width: 20px;
+    display: inline-block;
+    margin-left: -20px;
+}
