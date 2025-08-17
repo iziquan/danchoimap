@@ -4,7 +4,7 @@
   --ol-accent-background-color: #F5F5F5;
   --ol-subtle-background-color: rgba(128, 128, 128, 0.25);
   --ol-partial-background-color: rgba(255, 255, 255, 0.75);
-  --ol-foreground-color: #333333;
+  --ol-foreground-color: #000000;
   --ol-subtle-foreground-color: #666666;
   --ol-brand-color: #00AAFF;
 }
@@ -136,10 +136,16 @@
   cursor: grab;
 }
 
-.ol-control {
+/* .ol-control {
   position: absolute;
   background-color: var(--ol-subtle-background-color);
   border-radius: 4px;
+} */
+.ol-control {
+	position: absolute;
+	background-color: rgba(255, 255, 255, .4);
+	border-radius: 4px;
+	padding: 2px
 }
 
 .ol-zoom {
@@ -169,7 +175,7 @@
   top: .5em;
 }
 
-.ol-control button {
+/* .ol-control button {
   display: block;
   margin: 1px;
   padding: 0;
@@ -184,7 +190,23 @@
   background-color: var(--ol-background-color);
   border: none;
   border-radius: 2px;
-}
+} */
+.ol-control button {
+	display: block;
+	margin: 1px;
+	padding: 0;
+	color: #fff;
+	font-weight: 700;
+	text-decoration: none;
+	font-size: inherit;
+	text-align: center;
+	height: 1.375em;
+	width: 1.375em;
+	line-height: .4em;
+	background-color: rgba(0, 60, 136, .5);
+	border: none;
+	border-radius: 2px
+} 
 
 .ol-control button::-moz-focus-inner {
   border: none;
@@ -209,12 +231,21 @@
   top: 5.5em;
 }
 
-.ol-control button:hover,
+.ol-control:hover {
+	background-color: rgba(255, 255, 255, .6)
+}
+
+.ol-control button:focus,
+.ol-control button:hover {
+	text-decoration: none;
+	background-color: rgba(0, 60, 136, .7)
+}
+/* .ol-control button:hover,
 .ol-control button:focus {
   text-decoration: none;
   outline: 1px solid var(--ol-subtle-foreground-color);
   color: var(--ol-foreground-color);
-}
+} */
 
 .ol-zoom .ol-zoom-in {
   border-radius: 2px 2px 0 0;
