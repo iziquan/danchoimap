@@ -94,6 +94,7 @@ class RedDotMarker {
         const rx = q.get('rx');
         const rz = q.get('rz');
         if (!rx || !rz) return undefined;
+       
         const c = [parseInt(rx), parseInt(rz)];
         return c;
     }
@@ -547,12 +548,12 @@ class Unmined {
 
     static copyToClipboard(text, toast) {
         if (!navigator || !navigator.clipboard || !navigator.clipboard.writeText) {
-            Unmined.toast('Không thể truy cập bảng nhớ tạm')
+            Unmined.toast('Clipboard is not accessible')
             return;
         }
 
         navigator.clipboard.writeText(text);
-        Unmined.toast(toast ?? "Đã sao chép!");
+        Unmined.toast(toast ?? "Copied!");
     }
 
     static toast(message) {
@@ -567,7 +568,7 @@ class Unmined {
 
     createContextMenu() {
         const contextmenu = new ContextMenu({
-            width: 300,
+            width: 220,
             defaultItems: false,
             items: [],
         });
@@ -579,7 +580,7 @@ class Unmined {
 
             contextmenu.clear();
             contextmenu.push({
-                text: `Sao chép tọa độ /tp ${coordinates[0]} ~ ${coordinates[1]}`,
+                text: `Copy /tp ${coordinates[0]} ~ ${coordinates[1]}`,
                 callback: () => {
                     Unmined.copyToClipboard(`/tp ${coordinates[0]} ~ ${coordinates[1]}`);
                 }
@@ -587,7 +588,7 @@ class Unmined {
             contextmenu.push('-');
 
             contextmenu.push({
-                text: `Đặt điểm đánh dấu chấm đỏ tại đây`,
+                text: `Place red dot marker here`,
                 classname: 'menuitem-reddot',
                 callback: () => {
                     this.placeRedDotMarker(coordinates);
@@ -595,13 +596,13 @@ class Unmined {
             });
             if (this.redDotMarker.getCoordinates()) {
                 contextmenu.push({
-                    text: `Sao chép liên kết điểm đánh dấu`,
+                    text: `Copy marker link`,
                     callback: () => {
                         Unmined.copyToClipboard(window.location.href);
                     }
                 });
                 contextmenu.push({
-                    text: `Xóa điểm đánh dấu`,
+                    text: `Clear marker`,
                     callback: () => {
                         this.placeRedDotMarker(undefined);
                     }
@@ -613,7 +614,7 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showPlayers ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Hiển thị người chơi',
+                        text: 'Show players',
                         callback: () => this.togglePlayers()
                     })
             }
@@ -622,7 +623,7 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showMarkers ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Hiển thị điểm đánh dấu',
+                        text: 'Show markers',
                         callback: () => this.toggleMarkers()
                     })
             }
@@ -636,19 +637,19 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Hiển thị lưới',
+                        text: 'Show grid',
                         callback: () => this.toggleGrid()
                     })
                 contextmenu.push(
                     {
                         classname: this.#options.denseGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Lưới dày',
+                        text: 'Dense grid',
                         callback: () => this.toggleGridInterval()
                     })
                 contextmenu.push(
                     {
                         classname: this.#options.binaryGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Tọa độ nhị phân',
+                        text: 'Binary coordinates',
                         callback: () => this.toggleBinaryGrid()
                     })
             }
@@ -656,7 +657,7 @@ class Unmined {
             contextmenu.push(
                 {
                     classname: this.#options.showScaleBar ? 'menuitem-checked' : 'menuitem-unchecked',
-                    text: 'Hiển thị thước tỉ lệ',
+                    text: 'Show scalebar',
                     callback: () => this.toggleScaleBar()
                 })
 
