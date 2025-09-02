@@ -548,12 +548,12 @@ class Unmined {
 
     static copyToClipboard(text, toast) {
         if (!navigator || !navigator.clipboard || !navigator.clipboard.writeText) {
-            Unmined.toast('Clipboard is not accessible')
+            Unmined.toast('Không thể truy cập bảng nhớ tạm')
             return;
         }
 
         navigator.clipboard.writeText(text);
-        Unmined.toast(toast ?? "Copied!");
+        Unmined.toast(toast ?? "Đã sao chép!");
     }
 
     static toast(message) {
@@ -565,10 +565,9 @@ class Unmined {
         }).showToast();
     }
 
-
     createContextMenu() {
         const contextmenu = new ContextMenu({
-            width: 220,
+            width: 300,
             defaultItems: false,
             items: [],
         });
@@ -580,15 +579,14 @@ class Unmined {
 
             contextmenu.clear();
             contextmenu.push({
-                text: `Copy /tp ${coordinates[0]} ~ ${coordinates[1]}`,
+                text: `Sao chép tọa độ /tp ${coordinates[0]} ~ ${coordinates[1]}`,
                 callback: () => {
                     Unmined.copyToClipboard(`/tp ${coordinates[0]} ~ ${coordinates[1]}`);
                 }
             })
             contextmenu.push('-');
-
             contextmenu.push({
-                text: `Place red dot marker here`,
+                text: `Đặt điểm đánh dấu chấm đỏ tại đây`,
                 classname: 'menuitem-reddot',
                 callback: () => {
                     this.placeRedDotMarker(coordinates);
@@ -596,13 +594,13 @@ class Unmined {
             });
             if (this.redDotMarker.getCoordinates()) {
                 contextmenu.push({
-                    text: `Copy marker link`,
+                    text: `Sao chép liên kết điểm đánh dấu`,
                     callback: () => {
                         Unmined.copyToClipboard(window.location.href);
                     }
                 });
                 contextmenu.push({
-                    text: `Clear marker`,
+                    text: `Xóa điểm đánh dấu`,
                     callback: () => {
                         this.placeRedDotMarker(undefined);
                     }
@@ -614,7 +612,7 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showPlayers ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Show players',
+                        text: 'Hiển thị người chơi',
                         callback: () => this.togglePlayers()
                     })
             }
@@ -623,7 +621,7 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showMarkers ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Show markers',
+                        text: 'Hiển thị điểm đánh dấu',
                         callback: () => this.toggleMarkers()
                     })
             }
@@ -637,19 +635,19 @@ class Unmined {
                 contextmenu.push(
                     {
                         classname: this.#options.showGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Show grid',
+                        text: 'Hiển thị lưới',
                         callback: () => this.toggleGrid()
                     })
                 contextmenu.push(
                     {
                         classname: this.#options.denseGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Dense grid',
+                        text: 'Lưới dày',
                         callback: () => this.toggleGridInterval()
                     })
                 contextmenu.push(
                     {
                         classname: this.#options.binaryGrid ? 'menuitem-checked' : 'menuitem-unchecked',
-                        text: 'Binary coordinates',
+                        text: 'Tọa độ nhị phân',
                         callback: () => this.toggleBinaryGrid()
                     })
             }
@@ -657,7 +655,7 @@ class Unmined {
             contextmenu.push(
                 {
                     classname: this.#options.showScaleBar ? 'menuitem-checked' : 'menuitem-unchecked',
-                    text: 'Show scalebar',
+                    text: 'Hiển thị thước tỉ lệ',
                     callback: () => this.toggleScaleBar()
                 })
 
